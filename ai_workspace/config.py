@@ -2,7 +2,8 @@
 
 from pathlib import Path
 from typing import Optional, List, Dict, Any
-from pydantic import BaseSettings, validator
+from pydantic_settings import BaseSettings
+from pydantic import validator
 import yaml
 import os
 
