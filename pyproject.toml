@@ -1,0 +1,75 @@
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+name = "ai-workspace"
+version = "0.1.0"
+description = "Unified AI Imaging, 3D Generation & Chat Hub"
+authors = ["Bibin Abraham <bibin.io@example.com>"]
+readme = "README.md"
+packages = [{include = "ai_workspace"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+# Core framework
+fastapi = "^0.105.0"
+uvicorn = {extras = ["standard"], version = "^0.24.0"}
+# AI/ML Core
+mlx = {version = "^0.29.0", markers = "platform_machine == 'arm64'"}
+mlx-lm = {version = "^0.27.0", markers = "platform_machine == 'arm64'"}
+torch = "^2.3.0"
+torchvision = "^0.18.0"
+# Image Generation
+diffusers = "^0.35.0"
+transformers = "^4.56.0"
+accelerate = "^1.10.0"
+safetensors = "^0.6.0"
+# Vision Processing
+opencv-python = "^4.12.0"
+pillow = "^11.3.0"
+# Data & Config
+pydantic = "^2.5.0"
+pydantic-settings = "^2.1.0"
+pyyaml = "^6.0.0"
+# Database
+sqlalchemy = "^2.0.0"
+alembic = "^1.13.0"
+# Utilities
+rich = "^13.7.0"
+typer = {extras = ["all"], version = "^0.9.0"}
+httpx = "^0.25.0"
+# Async
+asyncio = "^3.4.3"
+aiofiles = "^23.2.0"
+
+[tool.poetry.group.dev.dependencies]
+# Testing
+pytest = "^7.4.0"
+pytest-asyncio = "^0.21.0"
+pytest-cov = "^4.1.0"
+# Code Quality
+black = "^23.12.0"
+isort = "^5.13.0"
+flake8 = "^6.1.0"
+mypy = "^1.8.0"
+# Development
+ipython = "^8.18.0"
+jupyter = "^1.0.0"
+
+[tool.poetry.scripts]
+ai-workspace = "ai_workspace.cli:main"
+
+[tool.black]
+line-length = 88
+target-version = ['py311']
+
+[tool.isort]
+profile = "black"
+line_length = 88
+
+[tool.mypy]
+python_version = "3.11"
+warn_return_any = true
+warn_unused_configs = true
+ignore_missing_imports = true
