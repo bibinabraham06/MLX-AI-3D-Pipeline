@@ -1,0 +1,41 @@
+# MLX + Home Lab Hybrid Configuration
+
+# Local MLX Models (MacBook Pro M4)
+local_models:
+  text_generation: "mlx-community/Meta-Llama-3.1-8B-Instruct-4bit"
+  image_generation: "mlx-community/stable-diffusion-xl-base-1.0-4bit"
+  vision: "mlx-community/depth-anything-v2-small"
+  code: "mlx-community/CodeLlama-7B-Instruct-4bit"
+
+# Home Lab Models (Ollama Server)
+home_lab:
+  host: "http://100.75.230.110:11434"
+  models:
+    heavy_text: "llama3.1:70b"
+    advanced_code: "codellama:34b"
+    reasoning: "qwen2.5:72b"
+    fast_response: "mistral:7b"
+
+# Workflow Rules
+routing:
+  - task: "real_time_3d"
+    use: "local"
+    reason: "Low latency required"
+
+  - task: "complex_reasoning"
+    use: "home_lab"
+    reason: "Larger model needed"
+
+  - task: "code_generation"
+    use: "hybrid"
+    reason: "Start local, fallback to home lab"
+
+# Performance Settings
+cache:
+  local_cache_size: "16GB"
+  model_swap_threshold: "5_minutes_idle"
+
+network:
+  timeout: "30s"
+  retry_attempts: 3
+  fallback_to_local: true
